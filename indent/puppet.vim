@@ -85,9 +85,9 @@ function! GetPuppetIndent()
     " package { 'mycoolpackage':
     "    ...
     " }
-    if line =~ '->$'
-        let ind -= &sw
-    endif
+    "if line =~ '->$'
+    "    let ind -= &sw
+    "endif
 
 
     return ind
