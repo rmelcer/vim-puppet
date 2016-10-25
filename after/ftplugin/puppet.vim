@@ -12,5 +12,6 @@ if g:puppet_align_hashes && exists(':Tabularize')
         normal! 0
         echo repeat('\([^=]\|=[^>]\)*=>',column).'\s\{-\}'.repeat('.',position)
         call search(repeat('\([^=]\|=[^>]\)*=>',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+        normal! $
     endfunction
 endif
