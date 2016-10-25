@@ -55,7 +55,9 @@ function! GetPuppetIndent()
         return ind
     endif
 
-    if pline =~ '\({\|\[\|(\|:\)$'
+    " Match { [ ( :
+    " and allow the line to end in whitespace and/or a comment
+    if pline =~ '\({\|\[\|(\|:\)\s*\(#.*\)\?$'
         let ind += &sw
     elseif pline =~ ';$' && pline !~ '[^:]\+:.*[=+]>.*'
         let ind -= &sw
@@ -68,7 +70,9 @@ function! GetPuppetIndent()
     endif
 
     " Match } }, }; ] ]: ], ]; )
-    if line =~ '^\s*\(}\(,\|;\)\?$\|]:\|],\|}]\|];\?$\|)\)'
+    " and allow the line to end in whitespace and/or a comment
+    if line =~ '^\s*\(}\(,\|;\)\?\s*\(#.*\)\?$\|]:\|],\|}]\|];\?\s*\(#.*\)\?$\|)\)'
+    "if line =~ '^\s*(}(,|;)?$|]:|],|}]|];?$|))'
         let ind = indent(s:OpenBrace(v:lnum))
     endif
 
