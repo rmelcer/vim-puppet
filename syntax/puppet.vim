@@ -1,8 +1,8 @@
 " puppet syntax file
 " Filename:     puppet.vim
 " Language:     puppet configuration file
-" Maintainer:   Luke Kanies <luke@madstop.com>
-" URL:
+" Maintainer:   Ryan Melcer <https://github.com/rmelcer>
+" URL:          https://github.com/rmelcer/vim-puppet
 " Last Change:
 " Version:
 "
