@@ -43,17 +43,21 @@ endfunction
 
 function! GetPuppetIndent()
     let pnum = prevnonblank(v:lnum - 1)
-    if pnum == 0
+    let pline = getline(pnum)
+
+    "Previous non-blank line was a comment, we're going to skip it.
+    let looplimit = pnum - 10000
+    while pnum != 0 && pnum > looplimit && pline =~ '^\s*#'
+        let pnum = prevnonblank(pnum - 1)
+        let pline = getline(pnum)
+    endwhile
+
+    if pnum == 0 || pnum == looplimit
        return 0
     endif
 
     let line = getline(v:lnum)
-    let pline = getline(pnum)
     let ind = indent(pnum)
-
-    if pline =~ '^\s*#'
-        return ind
-    endif
 
     " Match { [ ( :
     " and allow the line to end in whitespace and/or a comment
